@@ -5,22 +5,18 @@ const model = {
         name: 'June',
         src: 'img/cat1.jpg',
         clicksCount: 0,
-        class: 'img1',
     }, {
         name: 'Jully',
         src: 'img/cat2.jpg',
         clicksCount: 0,
-        class: 'img2',
     }, {
         name: 'Johana',
         src: 'img/cat3.jpg',
         clicksCount: 0,
-        class: 'img3',
     }, {
         name: 'Julia',
         src: 'img/cat4.jpg',
         clicksCount: 0,
-        class: 'img4',
     }],
 };
 
@@ -57,8 +53,8 @@ const view = {
             clicks: clicks,
         }
     },
-    init: () => {
 
+    init: () => {
         const selector = view.variables();
         selector.cats.forEach(element => {
             // Create the cats list menu
@@ -71,7 +67,6 @@ const view = {
                 selector.catImg.src = element.src;
                 selector.catImg.alt = element.src;
                 selector.catName.innerText = element.name;
-                selector.catImg.className = element.class;
                 selector.clicks.innerText = element.clicksCount;
             });
         });
@@ -79,6 +74,7 @@ const view = {
 
 
     },
+
     render: () => {
         // Cat image event listener
         const selector = view.variables();

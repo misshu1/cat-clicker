@@ -1,5 +1,6 @@
 body,
 html {
+    font-size: 17px;
     margin: 0 10vw;
     padding: 0;
     background: #6a3fc6;
@@ -14,7 +15,7 @@ html {
 
 .menu {
     background: #8514d1;
-    height: 100vh;
+    height: 90vh;
     width: 20vw;
     margin-right: .7rem;
     border: 1px solid #000;
@@ -22,7 +23,7 @@ html {
 
 .content {
     width: 70vw;
-    height: 100vh;
+    height: 90vh;
     background: #8514d1;
     text-align: center;
     border: 1px solid #000;
@@ -53,6 +54,14 @@ html {
     width: 90%;
     color: #fff;
     font-weight: 600;
+}
+
+.content-info #box-2 .clicks {
+    background: #aaa;
+    padding: .1rem .2rem;
+    border-radius: 3px;
+    color: #000;
+    font-size: 1.1rem;
 }
 
 #box-3 .button,
@@ -87,7 +96,27 @@ html {
     margin: 0;
 }
 
-@media screen and (max-width: 1200px) {
+footer {
+    margin-top: .7rem;
+    height: auto;
+    background: #8514d1;
+    text-align: center;
+    border: 1px solid #000;
+    color: #fff;
+    font-weight: 600;
+}
+
+footer a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #000;
+    font-weight: 900;
+}
+
+@media screen and (min-width: 601px) and (max-width: 1200px) {
     .container {
         display: flex;
         flex-direction: column;
@@ -98,11 +127,28 @@ html {
         height: fit-content;
         margin: .4rem 0;
     }
+    #cat {
+        max-width: 90%;
+    }
 }
 
 @media screen and (max-width: 600px) {
     body,
     html {
         margin: 1vw;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+    .menu,
+    .content {
+        width: 100%;
+        height: fit-content;
+        margin: .4rem 0;
+    }
+    #cat {
+        max-width: 85%;
+        clip-path: none;
     }
 }
