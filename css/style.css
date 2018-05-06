@@ -85,7 +85,7 @@ html {
     margin: 0;
 }
 
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
     .container {
         display: flex;
         flex-direction: column;
@@ -95,5 +95,12 @@ html {
         width: 100%;
         height: fit-content;
         margin: .4rem 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    body,
+    html {
+        margin: 1vw;
     }
 }
