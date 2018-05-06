@@ -23,10 +23,31 @@ const model = {
 
 
 const controller = {
+    variables: () => {
+        const list = document.querySelector('.list');
+        const cats = controller.getCats();
+        const catImg = document.querySelector('#cat');
+        const catName = document.querySelector('.cat-name');
+        const clicks = document.querySelector('.clicks');
+        const button = document.querySelector('.button');
+        const admin = document.querySelector('.admin');
+        const submit = document.querySelector('.submit');
+        return {
+            list: list,
+            cats: cats,
+            catImg: catImg,
+            catName: catName,
+            clicks: clicks,
+            button: button,
+            admin: admin,
+            submit: submit,
+        }
+    },
     init: () => {
-        view.variables();
+        controller.variables();
         view.init();
         view.render();
+        view.admin();
     },
     getCats: () => {
         return model.catsList;
@@ -39,23 +60,8 @@ const controller = {
 
 
 const view = {
-    variables: () => {
-        const list = document.querySelector('.list');
-        const cats = controller.getCats();
-        const catImg = document.querySelector('#cat');
-        const catName = document.querySelector('.cat-name');
-        const clicks = document.querySelector('.clicks');
-        return {
-            list: list,
-            cats: cats,
-            catImg: catImg,
-            catName: catName,
-            clicks: clicks,
-        }
-    },
-
     init: () => {
-        const selector = view.variables();
+        const selector = controller.variables();
         selector.cats.forEach(element => {
             // Create the cats list menu
             const li = document.createElement('li');
@@ -77,7 +83,7 @@ const view = {
 
     render: () => {
         // Cat image event listener
-        const selector = view.variables();
+        const selector = controller.variables();
         selector.catImg.addEventListener('click', element => {
             for (let i = 0; i < selector.cats.length; i++) {
                 if (element.target.getAttribute('src') === selector.cats[i].src) {
@@ -85,6 +91,36 @@ const view = {
                     selector.clicks.innerText = selector.cats[i].clicksCount;
                 };
             };
+        });
+    },
+    admin: () => {
+        // Change the cat image, name and clicks from admin menu
+        const selector = controller.variables();
+        const div = document.createElement('div');
+        div.innerHTML = `<fieldset>
+        <legend align="right">Admin</legend>
+        <div class="center">
+            <div class="input-label">
+                <p><label for="name">Cat Name</label></p>
+                <p> <label for="url">Img URL</label></p>
+                <p><label for="clicks-count">Clicks</label></p>
+            </div>
+            <div class="input-text">
+                <p> <input type="text" name="Cat Name" id="name" style="width: 100%"></p>
+                <p> <input type="text" name="Img URL" id="url" style="width: 100%"></p>
+                <p> <input type="number" name="Clicks" id="clicks-count" style="width: 100%"></p>
+            </div>
+        </div>
+        <div class="sub"><button class="cancel">Cancel</button><button class="submit">Submit</button>
+        </div>
+    </fieldset>`;
+
+        selector.button.addEventListener('click', () => {
+            selector.admin.insertAdjacentElement('afterbegin', div);
+            const cancel = document.querySelector('.cancel');
+            cancel.addEventListener('click', () => {
+                selector.admin.innerHTML = '';
+            });
         });
     },
 }

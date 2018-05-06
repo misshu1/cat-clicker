@@ -50,8 +50,7 @@ html {
 #box-3 {
     padding: 1rem;
     text-align: center;
-    height: 2rem;
-    width: 90%;
+    width: 100%;
     color: #fff;
     font-weight: 600;
 }
@@ -67,7 +66,7 @@ html {
 #box-3 .button,
 .list li {
     font-weight: 600;
-    padding: 0.6rem 0;
+    padding: .6rem 0;
     text-decoration: none;
     text-align: center;
     margin: auto;
@@ -76,10 +75,10 @@ html {
     border-radius: 3px;
     background: #c44e4e;
     color: #fff;
+    width: 90%;
 }
 
 .list li {
-    width: 90%;
     margin: .5rem auto;
 }
 
@@ -104,6 +103,74 @@ footer {
     border: 1px solid #000;
     color: #fff;
     font-weight: 600;
+}
+
+.center {
+    display: flex;
+    flex-direction: row;
+}
+
+fieldset {
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    margin: .7rem;
+}
+
+.input-text {
+    text-align: left;
+    margin-left: 1.5rem;
+}
+
+.input-label {
+    width: 60%;
+}
+
+.input-label p {
+    height: 1.5rem;
+    text-align: right;
+}
+
+legend,
+label {
+    color: #fff;
+}
+
+.sub {
+    display: flex;
+    flex-direction: row;
+}
+
+.submit,
+.cancel {
+    font-weight: 600;
+    padding: .6rem;
+    text-decoration: none;
+    margin: auto;
+    display: block;
+    border: 0;
+    border-radius: 3px;
+    background: #c44e4e;
+    color: #fff;
+    width: 30%;
+}
+
+.submit:hover,
+.cancel:hover {
+    background: #d3793d;
+    color: #000;
+    cursor: pointer;
+}
+
+#name,
+#url,
+#clicks-count {
+    border: none;
+    height: 1.3rem;
+    width: 50%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 17px;
 }
 
 footer a {
