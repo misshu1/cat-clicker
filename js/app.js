@@ -2,21 +2,25 @@
 
 const model = {
     catsList: [{
-        name: 'cat1',
+        name: 'June',
         src: 'img/cat1.jpg',
-        clicksCount: 0
+        clicksCount: 0,
+        class: 'img1',
     }, {
-        name: 'cat2',
+        name: 'Jully',
         src: 'img/cat2.jpg',
-        clicksCount: 0
+        clicksCount: 0,
+        class: 'img2',
     }, {
-        name: 'cat3',
+        name: 'Johana',
         src: 'img/cat3.jpg',
-        clicksCount: 0
+        clicksCount: 0,
+        class: 'img3',
     }, {
-        name: 'cat4',
+        name: 'Julia',
         src: 'img/cat4.jpg',
-        clicksCount: 0
+        clicksCount: 0,
+        class: 'img4',
     }],
 };
 
@@ -24,45 +28,69 @@ const model = {
 
 const controller = {
     init: () => {
+        view.variables();
         view.init();
+        view.render();
     },
     getCats: () => {
         return model.catsList;
-    }
+    },
+    counter(add) {
+        add.clicksCount++;
+    },
 };
 
 
 
 const view = {
-    init: () => {
+    variables: () => {
         const list = document.querySelector('.list');
         const cats = controller.getCats();
-        const catImg = document.getElementById('cat');
+        const catImg = document.querySelector('#cat');
         const catName = document.querySelector('.cat-name');
-        const clicks = document.querySelector('clicks');
+        const clicks = document.querySelector('.clicks');
+        return {
+            list: list,
+            cats: cats,
+            catImg: catImg,
+            catName: catName,
+            clicks: clicks,
+        }
+    },
+    init: () => {
 
-        cats.forEach(element => {
+        const selector = view.variables();
+        selector.cats.forEach(element => {
             // Create the cats list menu
             const li = document.createElement('li');
             li.innerText = element.name;
-            list.appendChild(li);
+            selector.list.appendChild(li);
 
             // Change image on click
             li.addEventListener('click', () => {
-                catImg.src = element.src;
-                catImg.alt = element.src;
+                selector.catImg.src = element.src;
+                selector.catImg.alt = element.src;
+                selector.catName.innerText = element.name;
+                selector.catImg.className = element.class;
+                selector.clicks.innerText = element.clicksCount;
             });
+        });
 
-            // Cat image event listener
-            catImg.addEventListener('click', ((name) => {
-                return function() {
-                    catName.innerText = name;
-                    console.log(name)
-                }
-            })(element.name));
+
+
+    },
+    render: () => {
+        // Cat image event listener
+        const selector = view.variables();
+        selector.catImg.addEventListener('click', element => {
+            for (let i = 0; i < selector.cats.length; i++) {
+                if (element.target.getAttribute('src') === selector.cats[i].src) {
+                    controller.counter(selector.cats[i]);
+                    selector.clicks.innerText = selector.cats[i].clicksCount;
+                };
+            };
         });
     },
-};
-
+}
 
 controller.init();
