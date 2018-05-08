@@ -1,6 +1,7 @@
 'use strict';
 
 const model = {
+    adminBtnVisible: false,
     catsList: [{
         name: 'June',
         src: 'img/cat1.jpg',
@@ -25,13 +26,12 @@ const model = {
 const controller = {
     variables: () => {
         const list = document.querySelector('.list');
-        const cats = controller.getCats();
+        let cats = controller.getCats();
         const catImg = document.querySelector('#cat');
         const catName = document.querySelector('.cat-name');
         const clicks = document.querySelector('.clicks');
         const button = document.querySelector('.button');
         const admin = document.querySelector('.admin');
-        const submit = document.querySelector('.submit');
         return {
             list: list,
             cats: cats,
@@ -40,7 +40,6 @@ const controller = {
             clicks: clicks,
             button: button,
             admin: admin,
-            submit: submit,
         }
     },
     init: () => {
@@ -55,6 +54,9 @@ const controller = {
     counter(add) {
         add.clicksCount++;
     },
+    showAdmin: () => {
+        return model.adminBtnVisible;
+    }
 };
 
 
@@ -97,7 +99,8 @@ const view = {
         // Change the cat image, name and clicks from admin menu
         const selector = controller.variables();
         const div = document.createElement('div');
-        div.innerHTML = `<fieldset>
+        div.innerHTML = `
+    <fieldset>
         <legend align="right">Admin</legend>
         <div class="center">
             <div class="input-label">
@@ -121,6 +124,16 @@ const view = {
             cancel.addEventListener('click', () => {
                 selector.admin.innerHTML = '';
             });
+
+            const submit = document.querySelector('.submit');
+            submit.addEventListener('click', () => {
+                const inputName = document.getElementById('name').value;
+                const inputUrl = document.getElementById('url').value;
+                const inputClicks = document.getElementById('clicks-count').value;
+                selector.cats.splice(999, 0, { 'name': inputName, 'src': inputUrl, 'clicksCount': inputClicks });
+                selector.list.innerHTML = '';
+                view.init();
+            })
         });
     },
 }
